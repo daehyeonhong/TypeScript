@@ -11,7 +11,7 @@
     }
 
     class CoffeeMakerImpl implements CoffeeMaker {
-        private static BEANS_GRAMM_PER_SHOT: number = 7; // class Level
+        private static BEANS_GRAM_PER_SHOT: number = 7; // class Level
 
         private coffeeBeans: number = 0; // instance (object) Level
 
@@ -31,10 +31,10 @@
 
         private grindBeans(shots: number) {
             console.log(`grinding beans for ${shots}`);
-            if (this.coffeeBeans < shots * CoffeeMakerImpl.BEANS_GRAMM_PER_SHOT)
+            if (this.coffeeBeans < shots * CoffeeMakerImpl.BEANS_GRAM_PER_SHOT)
                 throw new Error(`Not enough coffee beans!`);
 
-            this.coffeeBeans -= shots * CoffeeMakerImpl.BEANS_GRAMM_PER_SHOT;
+            this.coffeeBeans -= shots * CoffeeMakerImpl.BEANS_GRAM_PER_SHOT;
         }
 
         private preHeat(): void {

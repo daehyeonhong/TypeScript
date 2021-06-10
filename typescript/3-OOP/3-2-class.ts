@@ -5,7 +5,7 @@
     };
 
     class CoffeeMaker {
-        static BEANS_GRAMM_PER_SHOT: number = 7; // class Level
+        static BEANS_GRAM_PER_SHOT: number = 7; // class Level
 
         coffeeBeans: number = 0; // instance (object) Level
 
@@ -18,11 +18,11 @@
         }
 
         makeCoffee(shots: number): CoffeeCup {
-            if (this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT
+            if (this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAM_PER_SHOT
             )
                 throw new Error(`Not enough coffee beans!`);
 
-            this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT
+            this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAM_PER_SHOT
             ;
 
             return {

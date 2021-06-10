@@ -9,17 +9,13 @@
         makeCoffee(shots: number): CoffeeCup;
     }
 
-    class CoffeeMakerImpl implements CoffeeMaker {
-        private static BEANS_GRAMM_PER_SHOT: number = 7; // class Level
+    abstract class CoffeeMakerImpl implements CoffeeMaker {
+        private static BEANS_GRAM_PER_SHOT: number = 7; // class Level
 
         private coffeeBeans: number = 0; // instance (object) Level
 
         public constructor(coffeeBeans: number) {
             this.coffeeBeans = coffeeBeans;
-        }
-
-        static makeMachine(coffeeBeans: number): CoffeeMakerImpl {
-            return new CoffeeMakerImpl(coffeeBeans);
         }
 
         fillCoffeeBeans(beans: number) {
@@ -34,20 +30,17 @@
 
         private grindBeans(shots: number) {
             console.log(`grinding beans for ${shots}`);
-            if (this.coffeeBeans < shots * CoffeeMakerImpl.BEANS_GRAMM_PER_SHOT)
+            if (this.coffeeBeans < shots * CoffeeMakerImpl.BEANS_GRAM_PER_SHOT)
                 throw new Error(`Not enough coffee beans!`);
 
-            this.coffeeBeans -= shots * CoffeeMakerImpl.BEANS_GRAMM_PER_SHOT;
+            this.coffeeBeans -= shots * CoffeeMakerImpl.BEANS_GRAM_PER_SHOT;
         }
 
         private preHeat(): void {
             console.log('heating up... 🔥');
         }
 
-        private extract(shots: number): CoffeeCup {
-            console.log(`Pulling ${shots} shots... ☕`);
-            return {shots, hasMilk: false};
-        }
+        protected abstract extract(shots: number): CoffeeCup;
 
         makeCoffee(shots: number): CoffeeCup {
             this.grindBeans(shots);
@@ -66,25 +59,26 @@
             console.log('Steaming some milk... 🥛');
         }
 
-        makeCoffee(shots: number): CoffeeCup {
-            const coffee = super.makeCoffee(shots);
-            this.steamMilk()
-            return {...coffee, hasMilk: true};
+        protected extract(shots: number): CoffeeCup {
+            this.steamMilk();
+            return {
+                shots, hasMilk: true
+            };
         }
+
     }
 
     class SweetCoffeeMaker extends CoffeeMakerImpl {
-        makeCoffee(shots: number): CoffeeCup {
-            const coffee = super.makeCoffee(shots);
-            return {...coffee, hasSugar: true};
+
+        protected extract(shots: number): CoffeeCup {
+            return {shots, hasMilk: true};
         }
+
     }
 
     const machines = [
-        new CoffeeMakerImpl(16),
         new CaffeLatteMachine(16, '1'),
         new SweetCoffeeMaker(16),
-        new CoffeeMakerImpl(16),
         new CaffeLatteMachine(16, '1'),
         new SweetCoffeeMaker(16)
     ];
