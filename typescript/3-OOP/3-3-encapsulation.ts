@@ -32,8 +32,7 @@
             )
                 throw new Error(`Not enough coffee beans!`);
 
-            this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT
-            ;
+            this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT;
 
             return {
                 hasMilk: false, shots
