@@ -25,6 +25,8 @@ type SectionContainerConstructor = {
     new(): SectionContainer;
 };
 
+@EnableDragging
+@EnableHover
 export class PageItemComponent extends BaseComponent<HTMLElement> implements SectionContainer {
     private closeListener?: OnCloseListener;
     private dragStateListener?: OnDragStateListener<PageItemComponent>;
@@ -109,6 +111,7 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
 
 }
 
+@EnableDrop
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable {
     private children = new Set<SectionContainer>();
     private dropTarget?: SectionContainer;
@@ -116,21 +119,12 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
 
     constructor(private pageItemConstructor: SectionContainerConstructor) {
         super('<ul class="page"></ul>');
-        this.element.addEventListener('dragover', (event: DragEvent) => {
-            this.onDragOver(event);
-        });
-        this.element.addEventListener('drop', (event: DragEvent) => {
-            this.onDrop(event);
-        });
     }
 
     onDragOver(event: DragEvent) {
-        event.preventDefault();
-        console.log('onDragOver');
     }
 
     onDrop(event: DragEvent) {
-        event.preventDefault();
         console.log('onDrop');
         if (!this.dropTarget) {
             return;
