@@ -18,7 +18,7 @@
         return {
             hasMilk: false, shots
         }
-    };
+    }
 
     coffeeBeans += 3 * BEANS_GRAM_PER_SHOT;
     const coffee = makeCoffee(2);

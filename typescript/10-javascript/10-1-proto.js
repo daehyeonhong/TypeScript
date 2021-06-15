@@ -19,7 +19,7 @@
                 console.log(`making... ☕`);
             }
         */
-    };
+    }
 
     CoffeeMachine.prototype.makeCoffee = (shots) => {
         console.log(`making... ☕`);

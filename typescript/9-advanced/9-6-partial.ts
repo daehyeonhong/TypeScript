@@ -8,7 +8,7 @@
 
     function updateTodo(todo: ToDo, fieldsToUpdate: Partial<ToDo>) {
         return {...todo, ...fieldsToUpdate};
-    };
+    }
 
     const todo: ToDo = {
         title: 'learn TypeScript',
